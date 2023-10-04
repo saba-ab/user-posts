@@ -21,6 +21,10 @@ function createPostList(arr, parent, userId) {
     parent.appendChild(div);
   });
 }
+// function isSelected(user) {
+//   user.style.fontWeight === 800 ? true : false;
+// }
+let selected = null;
 
 function createUserList(arr, parent, allPosts) {
   arr.forEach((user) => {
@@ -29,8 +33,12 @@ function createUserList(arr, parent, allPosts) {
     userLi.id = user.id;
     userLi.addEventListener("click", () => {
       postsDiv.innerHTML = "";
-      console.log(this);
+      if (selected) {
+        selected.style.fontWeight = "normal";
+      }
       userLi.style.fontWeight = "800";
+
+      selected = userLi;
       createPostList(allPosts, postsDiv, user.id);
     });
     parent.appendChild(userLi);
